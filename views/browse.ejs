@@ -1,3 +1,5 @@
+<!-- views/browse.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,12 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browse Movies</title>
   <style>
-    body {
-        background-image: url('https://images5.alphacoders.com/573/573475.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
+body {
+  background: rgb(237,86,59);
+background: -moz-linear-gradient(180deg, rgba(237,86,59,1) 0%, rgba(0,0,0,0.9528186274509804) 14%);
+background: -webkit-linear-gradient(180deg, rgba(237,86,59,1) 0%, rgba(0,0,0,0.9528186274509804) 14%);
+background: linear-gradient(180deg, rgba(237,86,59,1) 0%, rgba(0,0,0,0.9528186274509804) 14%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ed563b",endColorstr="#000000",GradientType=1);
+}
 
     .movies {
       display: flex;
@@ -19,7 +22,7 @@
     }
     .card {
       background: rgb(64, 57, 162);
-      background: linear-gradient(180deg, rgb(237, 86, 59) 0%, rgba(101, 97, 97, 0.953) 54%);
+      background: linear-gradient(180deg, #ed563b 0%, rgba(101, 97, 97, 0.953) 54%);
       border: 1px solid #ccc;
       border-radius: 5px;
       padding: 8px; /* Adjusted padding */
@@ -37,29 +40,24 @@
     h2, p {
       font-size: 1.2rem; /* Set text size to 1.2rem */
     }
-    .section {
-      background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      text-align: center;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
   </style>
+  
 </head>
 <body>
 
-  <% include('navbar.ejs') %>
-
-  <div class="section">
-    <h2>Welcome to Our Movie Collection</h2>
-    <p>Check out our latest selection of movies below:</p>
-  </div>
-
+  <%- include('navbar.ejs') %>
+  <%- include('randommovie.ejs', { movie: randomMovie }) %> <!-- Pass randomMovie here -->
   <div class="movies">
-    <% movies.forEach(movie => { %>
+      <% movies.forEach(movie => { %>
       <div class="card">
-        <h2><%= movie.title %> (<%= movie.year %>)</h2>
-        <p><strong>Rating:</strong> <%= movie.rating %></p>
-        <p style="color: lightgray;"><strong>Summary:</strong> <%= movie.summary.length > 150 ? movie.summary.substring(0, 150) + '...' : movie.summary %></p>
-        <p><strong>Trailer Link:</strong> <a href="<%= movi
+          <h2 style="font-size: 25px;font-family:Verdana, Geneva, Tahoma, sans-serif;"><%= movie.title %> (<%= movie.year %>)</h2>
+          <p style="font-family:Verdana, Geneva, Tahoma, sans-serif;"><strong>Rating:</strong> <%= movie.rating %></p>
+          <p style="color: lightgray;"><strong>Summary:</strong> <%= movie.summary.length > 150 ? movie.summary.substring(0, 150) + '...' : movie.summary %></p>
+          <p style="font-family:Verdana, Geneva, Tahoma, sans-serif;"><strong>Trailer Link:</strong> <a href="<%= movie.trailerLink %>">Watch Trailer</a></p>
+          <img src="<%= movie.imageUrl %>" alt="<%= movie.title %> Poster">
+      </div>
+      <% }) %>
+  </div>
+  
+</body>
+</html>
