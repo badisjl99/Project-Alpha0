@@ -14,7 +14,7 @@ async function getRandomMovie() {
     }
 }
 
-router.get('/browse', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const movies = await Movie.aggregate([{ $sample: { size: 10 } }]);
         const randomMovie = await getRandomMovie(); // Fetch random movie
